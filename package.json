@@ -5,11 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start:ng": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node index.js",
+    "start:prod": "node index.js",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o",
     "gql-codegen": "graphql-codegen --config codegen.yml --watch",
     "gql-codegen:watch": "graphql-codegen --watch",
