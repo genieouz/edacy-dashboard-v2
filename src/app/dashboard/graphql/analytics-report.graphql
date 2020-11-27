@@ -1,0 +1,108 @@
+query AnalyticsReport ($analyticsReportInput: AnalyticsReportInput!) {
+  analyticsReport (analyticsReportInput: $analyticsReportInput) {
+    
+    activeLearnersInPeriod {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+    newComerLearnerStats {
+      totalRegistrations
+      totalEnrolled
+      totalCompletedProfile
+      discussionsExcangedThisWeek {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+      usersEngagedConversationsThisWeek {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+      usersCompletedProfile {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+      usersRegistred {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+      usersEnrolled {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+    }
+    programActivity {
+      programId
+      totalEngaged
+      totalCompleted
+      weeks {
+        week {
+          title 
+          order
+        }
+        usersCompleted {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+        users {
+        profile {
+          firstName
+          lastName
+          phoneNumber
+          email
+          middleName
+          whatsAppNumber
+        }
+      }
+        totalCompleted
+        totalEngaged
+        modules {
+          moduleId
+          totalEngaged
+          totalCompleted
+        }
+      }
+    }
+  }
+}

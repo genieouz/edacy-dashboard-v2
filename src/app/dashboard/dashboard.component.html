@@ -1,0 +1,628 @@
+<ngx-ui-loader [bgsType]="'folding-cube'" [fgsType]="'folding-cube'"></ngx-ui-loader>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">supervisor_account</i>
+                      </div>
+                      <p class="card-category">Total Registred Learners</p><br/>
+                      <h3 class="card-title">{{ analytics?.newComerLearnerStats?.totalRegistrations }}
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <a href="#registredLearner">view list</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-icon green-edacy">
+                      <div class="card-icon">
+                          <i class="material-icons">check</i>
+                      </div>
+                      <p class="card-category">Learners Who completed profile</p>
+                      <h3 class="card-title">{{ analytics?.newComerLearnerStats?.totalCompletedProfile }}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <a href="#learnersCompletedProfile">view list</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">book</i>
+                      </div>
+                      <p class="card-category">Learners who started the program</p>
+                      <h3 class="card-title">{{ analytics?.newComerLearnerStats?.totalEnrolled }}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <a href="#startedProgram">view list</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">notifications_active</i>
+                      </div>
+                      <p class="card-category">Active sign in this week</p><br/>
+                      <h3 class="card-title">{{ analytics?.activeLearnersInPeriod.length }}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <a href="#activeSign">view list</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">forum</i>
+                    </div>
+                    <p class="card-category">Learners Engaged Conversations this week</p>
+                    <h3 class="card-title">{{ analytics?.newComerLearnerStats?.usersEngagedConversationsThisWeek?.length }}
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <a href="#conversation">view list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">chat_bubble</i>
+                    </div>
+                    <p class="card-category">Discussions Exchanged this week</p>
+                    <h3 class="card-title">{{ analytics?.newComerLearnerStats?.discussionsExcangedThisWeek?.length }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                      <a href="#discussion">view list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let weekAnalytic of analytics?.programActivity.weeks; let i = index">
+            <div class="card card-stats">
+                <div class="card-header card-header-icon green-edacy">
+                    <div class="card-icon">
+                        <i class="material-icons">grade</i>
+                    </div>
+                    <p class="card-category">Learners Who Completed Week {{ (weekAnalytic.week.order - 10) / 10 }}</p>
+                    <h3 class="card-title">{{ weekAnalytic.totalCompleted }}
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <a href="#{{'week_c_'+i}}">view list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+
+      
+      <div class="row">
+          <!-- <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-tabs card-header-primary">
+                      <div class="nav-tabs-navigation">
+                          <div class="nav-tabs-wrapper">
+                              <span class="nav-tabs-title">Tasks:</span>
+                              <ul class="nav nav-tabs" data-tabs="tabs">
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
+                                          <i class="material-icons">bug_report</i> Bugs
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                                          <i class="material-icons">code</i> Website
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                          <i class="material-icons">cloud</i> Server
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="profile">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="messages">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="settings">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> -->
+          <div class="col-lg-12 col-md-12" id="learnersCompletedProfile">
+              <div class="card">
+                  <div class="card-header card-header-warning card-edacy">
+                      <h4 class="card-title">Users who completed their profile</h4>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>firstName</th>
+                              <th>lastName</th>
+                              <th>middleName</th>
+                              <th>phoneNumber</th>
+                                <th>email</th>
+                                <th>whatsAppNumber</th>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let user of analytics?.newComerLearnerStats.usersCompletedProfile | paginate: { itemsPerPage: numberOflines['learnersCompletedProfile'] || 10, currentPage: currentPage['learnersCompletedProfile'] || 1, id: 'learnersCompletedProfile' }">
+                                  <td>{{ user.profile.firstName }}</td>
+                                  <td>{{ user.profile.lastName }}</td>
+                                  <td>{{ user.profile.middleName }}</td>
+                                  <td>{{ user.profile.phoneNumber }}</td>
+                                  <td>{{ user.profile.email }}</td>
+                                  <td>{{ user.profile.whatsAppNumber }}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      <div class="row">
+                        <pagination-controls (pageChange)="currentPage['learnersCompletedProfile'] = $event" [id]="'learnersCompletedProfile'"></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['learnersCompletedProfile']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-12 col-md-12" id="registredLearner">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Registred Learners</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of analytics?.newComerLearnerStats.usersRegistred | paginate: { itemsPerPage: numberOflines['registredLearners'] || 10, currentPage: currentPage['registredLearners'] || 1, id: 'registredLearners' }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['registredLearners'] = $event" id='registredLearners'></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['registredLearners']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12" id="startedProgram">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Learners who started the program</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of analytics?.newComerLearnerStats.usersEnrolled | paginate: { itemsPerPage: numberOflines['learnersStartedProgram'] || 10, currentPage: currentPage['learnersStartedProgram'] || 1, id:'learnersStartedProgram' }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['learnersStartedProgram'] = $event" id='learnersStartedProgram'></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['learnersStartedProgram']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12" id="activeSign">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Active sign in this week</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of analytics?.activeLearnersInPeriod | paginate: { itemsPerPage: numberOflines['activeLearner'] || 10, currentPage: currentPage['activeLearner'] || 1, id:'activeLearner' }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['activeLearner'] = $event" id='activeLearner'></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['activeLearner']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12" id="conversation">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Learners Engaged Conversations this week</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of analytics?.newComerLearnerStats?.usersEngagedConversationsThisWeek | paginate: { itemsPerPage: numberOflines['chat'] || 10, currentPage: currentPage['chat'] || 1, id:'chat' }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['chat'] = $event" id='chat'></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['chat']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12" id="discussion">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Discussions Exchanged this week</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of analytics?.newComerLearnerStats?.discussionsExcangedThisWeek | paginate: { itemsPerPage: numberOflines['discussion'] || 10, currentPage: currentPage['discussion'] || 1, id:'discussion' }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['discussion'] = $event" id='discussion'></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['discussion']" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--   FOR WEEKS   -->
+        <div class="col-lg-12 col-md-12" *ngFor="let week of analytics?.programActivity?.weeks; let i = index" id="{{'week_c_'+i}}">
+            <div class="card">
+                <div class="card-header card-header-warning card-edacy">
+                    <h4 class="card-title">Learners Who Completed Week {{ (week.week.order - 10) / 10 }}</h4>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>middleName</th>
+                            <th>phoneNumber</th>
+                              <th>email</th>
+                              <th>whatsAppNumber</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of week.usersCompleted | paginate: { itemsPerPage: numberOflines['week_'+i] || 10, currentPage: currentPage['week_'+i] || 1, id: 'week_'+i }">
+                                <td>{{ user.profile.firstName }}</td>
+                                <td>{{ user.profile.lastName }}</td>
+                                <td>{{ user.profile.middleName }}</td>
+                                <td>{{ user.profile.phoneNumber }}</td>
+                                <td>{{ user.profile.email }}</td>
+                                <td>{{ user.profile.whatsAppNumber }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <pagination-controls (pageChange)="currentPage['week_'+i] = $event" [id]="'week_'+i"></pagination-controls>
+                        Peer <select class="form-control" [(ngModel)]="numberOflines['week_'+i]" [value]="10">
+                            <option *ngFor="let i of [10, 50, 100, 200, 500, 1000]" [value]="i">{{i}}</option>
+                        </select> items
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div (click)="scrollToTop()" class="scroll-to-top" *ngIf="pageYoffset > 0" >
+    <button mat-fab color="primary" aria-label="To Top">
+        <mat-icon>arrow_upward</mat-icon>
+    </button>
+</div>

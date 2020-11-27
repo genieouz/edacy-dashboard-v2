@@ -1,0 +1,25 @@
+select {
+    width: 50px;
+}
+.scroll-to-top {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;    
+    z-index: 9999;
+}
+
+.scroll-to-top button {
+    background: #FFCC00;
+}
+
+.card-header-warning .card-icon {
+    background: #FFCC00;
+}
+
+.card .card-edacy {
+    background: #61BFAD;
+}
+
+.green-edacy .card-icon {
+    background: #61BFAD;
+}

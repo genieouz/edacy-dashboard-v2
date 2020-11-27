@@ -1,0 +1,7 @@
+query FetchProgramsBySource ($clientFilter: ClientFilterInput, $source: UserSource!) {
+  fetchProgramsBySource(clientFilter: $clientFilter, source: $source) {
+    id
+    title
+    source
+  }
+}
