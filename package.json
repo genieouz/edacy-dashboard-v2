@@ -16,10 +16,6 @@
     "gql-codegen:watch": "graphql-codegen --watch",
     "start:dev": "run-p start:ng gql-codegen:watch"
   },
-  "engines": {
-    "node": "6.11.1",
-    "npm": "3.10.9"
-  },
   "private": true,
   "dependencies": {
     "@agm/core": "^1.1.0",
