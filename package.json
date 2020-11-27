@@ -1,5 +1,5 @@
 {
-  "name": "material-dashboard-angular",
+  "name": "edacy-dashboard-v2",
   "version": "2.5.0",
   "license": "MIT",
   "scripts": {
@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "start": "node index.js",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o",
     "gql-codegen": "graphql-codegen --config codegen.yml --watch",
     "gql-codegen:watch": "graphql-codegen --watch",
@@ -42,8 +43,9 @@
     "chartist": "0.11.4",
     "classlist.js": "1.1.20150312",
     "core-js": "3.6.5",
+    "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
-    "express": "4.17.1",
+    "express": "^4.17.1",
     "googleapis": "61.0.0",
     "graphql": "^15.4.0",
     "hammerjs": "2.0.8",
