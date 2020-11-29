@@ -23,3 +23,6 @@ select {
 .green-edacy .card-icon {
     background: #61BFAD;
 }
+.cursor-pointer {
+    cursor: pointer;
+}

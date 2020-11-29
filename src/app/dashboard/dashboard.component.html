@@ -370,10 +370,10 @@
           <div class="col-lg-12 col-md-12" id="learnersCompletedProfile">
               <div class="card">
                   <div class="card-header card-header-warning card-edacy">
-                      <h4 class="card-title">Users who completed their profile</h4>
+                      <h4 class="card-title">Users who completed their profile <b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.newComerLearnerStats?.usersCompletedProfile, 'users_who_completed_profile')">download</b></h4>
                   </div>
                   <div class="card-body table-responsive">
-                      <table class="table table-hover">
+                      <table class="table table-hover" data-show-export=true>
                           <thead class="text-warning">
                               <th>firstName</th>
                               <th>lastName</th>
@@ -383,7 +383,7 @@
                                 <th>whatsAppNumber</th>
                           </thead>
                           <tbody>
-                              <tr *ngFor="let user of analytics?.newComerLearnerStats.usersCompletedProfile | paginate: { itemsPerPage: numberOflines['learnersCompletedProfile'] || 10, currentPage: currentPage['learnersCompletedProfile'] || 1, id: 'learnersCompletedProfile' }">
+                              <tr *ngFor="let user of analytics?.newComerLearnerStats?.usersCompletedProfile | paginate: { itemsPerPage: numberOflines['learnersCompletedProfile'] || 10, currentPage: currentPage['learnersCompletedProfile'] || 1, id: 'learnersCompletedProfile' }">
                                   <td>{{ user.profile.firstName }}</td>
                                   <td>{{ user.profile.lastName }}</td>
                                   <td>{{ user.profile.middleName }}</td>
@@ -405,7 +405,7 @@
           <div class="col-lg-12 col-md-12" id="registredLearner">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Registred Learners</h4>
+                    <h4 class="card-title">Registred Learners<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.newComerLearnerStats?.usersRegistred, 'registred_users')">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">
@@ -440,7 +440,7 @@
         <div class="col-lg-12 col-md-12" id="startedProgram">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Learners who started the program</h4>
+                    <h4 class="card-title">Learners who started the program<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.newComerLearnerStats?.usersEnrolled, 'learners_started_program')">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">
@@ -476,7 +476,7 @@
         <div class="col-lg-12 col-md-12" id="activeSign">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Active sign in this week</h4>
+                    <h4 class="card-title">Active sign in this week<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.activeLearnersInPeriod, 'active_learners')">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">
@@ -512,7 +512,7 @@
         <div class="col-lg-12 col-md-12" id="conversation">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Learners Engaged Conversations this week</h4>
+                    <h4 class="card-title">Learners Engaged Conversations this week<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.newComerLearnerStats?.usersEngagedConversationsThisWeek, 'learners_engaged_conversations_this_week')">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">
@@ -548,7 +548,7 @@
         <div class="col-lg-12 col-md-12" id="discussion">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Discussions Exchanged this week</h4>
+                    <h4 class="card-title">Discussions Exchanged this week<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(analytics?.newComerLearnerStats?.discussionsExcangedThisWeek, 'learners_exchanged_discussions_this_week')">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">
@@ -585,7 +585,7 @@
         <div class="col-lg-12 col-md-12" *ngFor="let week of analytics?.programActivity?.weeks; let i = index" id="{{'week_c_'+i}}">
             <div class="card">
                 <div class="card-header card-header-warning card-edacy">
-                    <h4 class="card-title">Learners Who Completed Week {{ (week.week.order - 10) / 10 }}</h4>
+                    <h4 class="card-title">Learners Who Completed Week {{ (week.week.order - 10) / 10 }}<b class="pull-right material-icons cursor-pointer" (click)="exportAsXLSX(week.usersCompleted, 'learners_completed_week_'+((week.week.order - 10) / 10))">download</b></h4>
                 </div>
                 <div class="card-body table-responsive">
                     <table class="table table-hover">

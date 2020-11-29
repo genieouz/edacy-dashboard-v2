@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatIconModule} from '@angular/material/icon';
+import { ExcelService } from 'app/shared/services/excel.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {MatIconModule} from '@angular/material/icon';
     NgxPaginationModule,
     MatIconModule
   ],
+  providers: [ExcelService],
   declarations: [
     DashboardComponent,
     UserProfileComponent,

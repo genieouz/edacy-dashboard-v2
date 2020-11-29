@@ -5,6 +5,7 @@ import { EnvironmentSetupService } from 'app/components/navbar/environment-setup
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ViewportScroller } from '@angular/common';
+import { ExcelService } from 'app/shared/services/excel.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
     private readonly environmentSetupService: EnvironmentSetupService,
     private readonly fetchProgramsBySourceGQL: FetchProgramsBySourceGQL,
     private ngxService: NgxUiLoaderService,
-    private scroll: ViewportScroller
+    private scroll: ViewportScroller,
+    private excelService: ExcelService
   ) {}
 
   pageYoffset = 0;
@@ -200,4 +202,10 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForBarChart(websiteViewsChart);
   }
 
+  exportAsXLSX(data, fileName: string):void {
+    data = data.map(user => {
+      return user.profile;
+    });
+    this.excelService.exportAsExcelFile(data, fileName);
+  }
 }
