@@ -4,6 +4,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import { Router } from '@angular/router';
 import { UserSource, FetchProgramsBySourceGQL, Program } from 'generated/graphql';
 import { EnvironmentSetupService } from './environment-setup.service';
+import { AuthService } from 'app/auth/service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
         private router: Router, 
         private readonly fetchProgramsBySourceGQL: FetchProgramsBySourceGQL,
         private readonly environmentSetupService: EnvironmentSetupService,
+        private readonly authService: AuthService
     ) {
         this.location = location;
         this.sidebarVisible = false;
@@ -52,10 +54,22 @@ export class NavbarComponent implements OnInit {
 
     fetchProgramsForCurrentSource() {
         this.fetchProgramsBySourceGQL.fetch({ source: this.currentSource as UserSource }).subscribe(
-            ({ data }) => {
+            ({ data, errors }) => {
+                if (errors) {
+                    const error: any = errors[0];
+                    console.log({error})
+                    if(error.status == 401 || error.status == 403){
+          
+                      this.authService.logout();
+                      this.router.navigate(["/login"]);
+                    }
+                  }
                 this.programs = data.fetchProgramsBySource as Program[];
                 this.currentProgram = this.programs[0].id
                 localStorage.setItem('program', this.currentProgram);
+            }, 
+            (error) => {
+                console.log(error)
             }
         )
     }
@@ -63,12 +77,17 @@ export class NavbarComponent implements OnInit {
     setLocalStorageData() {
         localStorage.setItem('source', this.currentSource);
         localStorage.setItem('program', this.currentProgram);
-        console.log({prog: this.currentProgram, source: this.currentSource })
+        console.log({prog: this.currentProgram, source: this.currentSource });
         this.fetchProgramsForCurrentSource();
     }
 
     chargeNewData() {
         this.environmentSetupService.environmentSubject.next({ source: this.currentSource, program: this.currentProgram });
+    }
+
+    logout() {
+        this.authService.logout();
+        this.router.navigate(["/login"]);
     }
 
     sidebarOpen() {

@@ -1,10 +1,7 @@
-import { gql } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -163,6 +160,7 @@ export type Query = {
   getMyProgramWeekMetrics: ProgramWeekMaterialMetrics;
   fetchManyPlatformFeedbacks: Array<PlatformFeedback>;
   fetchPlatformFeedback: PlatformFeedback;
+  fetchSessionByToken: Session;
   countNotifications: Scalars['Float'];
   fetchNotificationRedirects: Array<NotificationRedirect>;
   fetchChatMessages: Array<ChatMessage>;
@@ -897,6 +895,11 @@ export type QueryFetchManyPlatformFeedbacksArgs = {
 
 export type QueryFetchPlatformFeedbackArgs = {
   platformFeedbackId: Scalars['ID'];
+};
+
+
+export type QueryFetchSessionByTokenArgs = {
+  token: Scalars['String'];
 };
 
 
@@ -2454,6 +2457,15 @@ export enum PlatformFeedbackType {
   Bug = 'Bug',
   Idea = 'Idea'
 }
+
+export type Session = {
+  __typename?: 'Session';
+  id: Scalars['ID'];
+  createdAt: Scalars['Date'];
+  updatedAt: Scalars['Date'];
+  token: Scalars['String'];
+  user: User;
+};
 
 export type DateRangeInput = {
   from: Scalars['Date'];
@@ -4842,15 +4854,6 @@ export type CreateProfileInput = {
   password: Scalars['String'];
 };
 
-export type Session = {
-  __typename?: 'Session';
-  id: Scalars['ID'];
-  createdAt: Scalars['Date'];
-  updatedAt: Scalars['Date'];
-  token: Scalars['String'];
-  user: User;
-};
-
 export type PrimaryEmailOptsInput = {
   alternativeEmail: Scalars['String'];
 };
@@ -5074,9 +5077,30 @@ export type EarnedReward = {
   message: Scalars['String'];
 };
 
-export type AnalyticsReportQueryVariables = Exact<{
+export type LoginMutationVariables = {
+  credentials: CredentialsInput;
+};
+
+
+export type LoginMutation = (
+  { __typename?: 'Mutation' }
+  & { login: (
+    { __typename?: 'Session' }
+    & Pick<Session, 'token'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'role'>
+      & { profile: (
+        { __typename?: 'Profile' }
+        & Pick<Profile, 'email'>
+      ) }
+    ) }
+  ) }
+);
+
+export type AnalyticsReportQueryVariables = {
   analyticsReportInput: AnalyticsReportInput;
-}>;
+};
 
 
 export type AnalyticsReportQuery = (
@@ -5153,10 +5177,10 @@ export type AnalyticsReportQuery = (
   ) }
 );
 
-export type FetchProgramsBySourceQueryVariables = Exact<{
+export type FetchProgramsBySourceQueryVariables = {
   clientFilter?: Maybe<ClientFilterInput>;
   source: UserSource;
-}>;
+};
 
 
 export type FetchProgramsBySourceQuery = (
@@ -5167,6 +5191,28 @@ export type FetchProgramsBySourceQuery = (
   )> }
 );
 
+export const LoginDocument = gql`
+    mutation Login($credentials: CredentialsInput!) {
+  login(credentials: $credentials) {
+    token
+    user {
+      id
+      role
+      profile {
+        email
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
+    document = LoginDocument;
+    
+  }
 export const AnalyticsReportDocument = gql`
     query AnalyticsReport($analyticsReportInput: AnalyticsReportInput!) {
   analyticsReport(analyticsReportInput: $analyticsReportInput) {
@@ -5283,9 +5329,6 @@ export const AnalyticsReportDocument = gql`
   export class AnalyticsReportGQL extends Apollo.Query<AnalyticsReportQuery, AnalyticsReportQueryVariables> {
     document = AnalyticsReportDocument;
     
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
   }
 export const FetchProgramsBySourceDocument = gql`
     query FetchProgramsBySource($clientFilter: ClientFilterInput, $source: UserSource!) {
@@ -5303,7 +5346,4 @@ export const FetchProgramsBySourceDocument = gql`
   export class FetchProgramsBySourceGQL extends Apollo.Query<FetchProgramsBySourceQuery, FetchProgramsBySourceQueryVariables> {
     document = FetchProgramsBySourceDocument;
     
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
   }

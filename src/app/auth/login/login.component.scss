@@ -1,0 +1,88 @@
+@import '../../theme/variables.scss';
+
+.container-block {
+    text-align: center;
+    align-items: center;
+    background: #FFFFFF;
+    width: 100%;
+    height: 110vh;
+    margin-top: -100px;
+    padding-top: 0;
+}
+
+#logo {
+    height: 340px;
+    margin-bottom: 0;
+}
+
+a {
+    color: #2185C5;
+}
+
+.message {
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.81px;
+    color: rgba(27, 38, 54, 0.79);
+}
+
+.help-message {
+    font-size: 14px;
+    margin-left: 28%;
+    letter-spacing: 0.81px;
+    color: #2185C5;
+    margin-top: 30px;
+}
+.form-auth {
+    align-items: center;
+    text-align: center;
+    margin-top: 34px;
+    width: 690px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f1f1f1;
+    position: absolute;
+    top: 25%;
+    right: 30%;
+}
+.login-label {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+input {
+    width: 40%;
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding-top: 6px;
+    padding-left: 25px;
+    font-size: 20px;
+    line-height: 23px;
+    color: #8E8E8E;
+    margin-bottom: 32px;
+}
+
+button {
+    height: 35px;
+    width: 90px;
+    border-radius: 4px;
+    background: $edacyYellow;
+    box-sizing: border-box;
+    border: none;
+    align-items: center;
+    text-align: center;
+    color: black;
+}
+
+.input-error-message {
+    width: 504px;
+    text-overflow: wrap;
+    text-align: left;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}

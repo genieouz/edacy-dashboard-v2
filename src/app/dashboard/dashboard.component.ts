@@ -6,6 +6,8 @@ import { NgxUiLoaderService } from "ngx-ui-loader";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ViewportScroller } from '@angular/common';
 import { ExcelService } from 'app/shared/services/excel.service';
+import { AuthService } from 'app/auth/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,9 @@ export class DashboardComponent implements OnInit {
     private readonly fetchProgramsBySourceGQL: FetchProgramsBySourceGQL,
     private ngxService: NgxUiLoaderService,
     private scroll: ViewportScroller,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) {}
 
   pageYoffset = 0;
@@ -101,14 +105,28 @@ export class DashboardComponent implements OnInit {
 
     this.ngxService.startLoader("loader-01"); 
     this.analyticsReportGQL.fetch({ analyticsReportInput: { programId: localStorage.getItem('program') || fetchProgramsBySource[0].id } }).subscribe(
-      ({ data }) => {
+      ({ data, errors }) => {
+        if (errors) {
+          const error: any = errors[0];
+          console.log({error})
+          if(error.status == 401 || error.status == 403){
+
+            this.authService.logout();
+            this.router.navigate(["/login"]);
+          }
+        }
         this.analytics = data.analyticsReport as AnalyticsReport;
         this.ngxService.stop(); 
         this.ngxService.stopLoader("loader-01");
       }, 
       (error) => {
+        console.log('errorrr', JSON.stringify(error))
         this.ngxService.stop(); 
         this.ngxService.stopLoader("loader-01");
+        if(error.graphQLErrors && error.graphQLErrors[0] && (error.graphQLErrors[0].status == 401 || error.graphQLErrors[0].status == 403)){
+          this.authService.logout();
+          this.router.navigate(["/login"]);
+        }
       }
     )
   }

@@ -1,0 +1,12 @@
+mutation Login ($credentials: CredentialsInput!) {
+  login(credentials: $credentials) {
+    token,
+    user {,
+      id
+      role
+      profile {
+        email
+      }
+    }
+  }
+}
