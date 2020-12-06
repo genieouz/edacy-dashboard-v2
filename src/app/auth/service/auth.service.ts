@@ -37,7 +37,8 @@ export class AuthService {
     }
 
     logout() {
-        this.clearStorage();
+        this.registerToken(null);
+        this.registerCurrentSession(null);
     }
 
     isConnected(): boolean {

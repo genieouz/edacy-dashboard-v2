@@ -3,7 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoginGQL } from 'generated/graphql';
+import { LoginGQL, UserSource } from 'generated/graphql';
+import { EnvironmentSetupService } from 'app/components/navbar/environment-setup.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,13 +13,22 @@ import { LoginGQL } from 'generated/graphql';
 export class LoginComponent implements OnInit {
   errorMessage: string;
   loginForm: FormGroup;
+  location: Location;
+  userSource = [];
+  currentSource: UserSource;
   constructor(
     private readonly authService: AuthService, 
     private readonly router: Router,
-    private readonly loginGQL: LoginGQL
-  ) { }
+    private readonly loginGQL: LoginGQL,
+    private readonly environmentSetupService: EnvironmentSetupService,
+  ) {
+    this.location = location;
+    this.userSource = this.environmentSetupService.fetchSource();
+  }
 
   ngOnInit(): void {
+    this.currentSource = this.userSource[0];
+    localStorage.setItem('source', this.currentSource);
     this.loginForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),

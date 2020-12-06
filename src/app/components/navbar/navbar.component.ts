@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
             ({ data, errors }) => {
                 if (errors) {
                     const error: any = errors[0];
-                    console.log({error})
+                    // console.log({error})
                     if(error.status == 401 || error.status == 403){
           
                       this.authService.logout();
@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit {
                 localStorage.setItem('program', this.currentProgram);
             }, 
             (error) => {
-                console.log(error)
+                // console.log(error)
             }
         )
     }
